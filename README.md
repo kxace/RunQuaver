@@ -1,4 +1,4 @@
-![Alt text](https://github.com/kxace/RunQuaver/src/runquaver/quavergame/static/img/cover.png?raw=true "RUNQUAVER welcome")
+![Alt text](https://github.com/kxace/RunQuaver/blob/master/src/runquaver/quavergame/static/img/cover.png?raw=true "RUNQUAVER welcome")
 
 URL of our runquaver website:  https://runquaver.hopto.org/  
 (Chrome access suggested! Best played in FULLSCREEN)
@@ -16,9 +16,9 @@ Keyboard mode:
 
 -----------------
 See instructions for playing!
-![Alt text](https://github.com/kxace/RunQuaver/src/runquaver/quavergame/static/img/home.png?raw=true "InstructionPage1")
-![Alt text](https://github.com/kxace/RunQuaver/src/runquaver/quavergame/static/img/game.png?raw=true "InstructionPage1")
-![Alt text](https://github.com/kxace/RunQuaver/src/runquaver/quavergame/static/img/info.png?raw=true "InstructionPage1")
+![Alt text](https://github.com/kxace/RunQuaver/blob/master/src/runquaver/quavergame/static/img/home.png?raw=true "InstructionPage1")
+![Alt text](https://github.com/kxace/RunQuaver/blob/master/src/runquaver/quavergame/static/img/game.png?raw=true "InstructionPage1")
+![Alt text](https://github.com/kxace/RunQuaver/blob/master/src/runquaver/quavergame/static/img/info.png?raw=true "InstructionPage1")
 
 There are some more funny features for you to explore! Check it out
 
