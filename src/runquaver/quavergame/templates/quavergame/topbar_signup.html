@@ -1,0 +1,48 @@
+{% load static %}
+<div id='topbar-signup' class='container-fluid'>
+    <span>
+        <img class='back-btn' src="{% static 'img/ic_launcher.png' %}" onclick="back()">
+        <h2 class="dis-inline">RUN! QUAVER</h2>
+    </span>
+    <div class='margin'>
+        <div class='input-group dis-center'>
+            <span class='input-group-addon'><i class='glyphicon glyphicon-user'></i></span>
+            <input id='signup-un' type='text' class='form-control' placeholder='Username'>
+        </div>
+        <div class='input-group dis-center'>
+            <span class='input-group-addon'><i class='glyphicon glyphicon-lock'></i></span>
+            <input id='signup-pw' type='password' class='form-control' placeholder='Enter password'>
+        </div>
+        <div class='input-group dis-center'>
+            <span class='input-group-addon'><i class='glyphicon glyphicon-lock'></i></span>
+            <input id='signup-pw-confirm' type='password' class='form-control' placeholder='Confirm password'>
+        </div>
+        <button id="icon-select" class="btn btn-warning" onclick="selectIcon()">Choose Icon</button>
+        <button id="signup-submit" class="btn btn-info">Submit</button>
+
+        <div id="iconModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span id="iconClose" class="close" onclick="closeSelectIcon()"><img src="{% static 'img/close.png' %}" style="height: 48px; width:48px;"></span>
+                    <h3>PICK YOUR FAVORITE ICON:</h3>
+                </div>
+                <div class="modal-body">
+                    <ul style="padding: 0">
+                        <li class="dis-inline border" onclick="saveImgUrl(1)"><img id='icon1' class="icon-size" src="{% static 'img/cat-clean-icon.png' %}"></li>
+
+                        <li class="dis-inline border" onclick="saveImgUrl(2)"><img id='icon2' class="icon-size" src="{% static 'img/cat-grumpy-icon.png' %}"></li>
+
+                        <li class="dis-inline border" onclick="saveImgUrl(3)"><img id='icon3' class="icon-size" src="{% static 'img/cat-sleep-icon.png' %}"></li>
+
+                        <li class="dis-inline border" onclick="saveImgUrl(4)"><img id='icon4' class="icon-size" src="{% static 'img/cat-purr-icon.png' %}"></li>
+
+                        <li class="dis-inline border" onclick="saveImgUrl(5)"><img id='icon5' class="icon-size" src="{% static 'img/cat-music-icon.png' %}"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input id='imgURL' type="hidden" name="imgURL" value="">
+</div>
+
+

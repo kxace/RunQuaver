@@ -1,0 +1,21 @@
+.screen {
+    margin: 20px;
+    width: 900px;
+    height: 700px;
+    padding-top: 100px;
+}
+
+.select-button {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-style: solid;
+    border-color: whitesmoke;
+    font-family: Courier New, sans-serifr;
+}
+
+.select-text {
+    color: #909497;
+    font-size: 20px;
+    font-family: Courier New, sans-serifr;
+}

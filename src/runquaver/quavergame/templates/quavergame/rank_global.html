@@ -1,0 +1,21 @@
+<ul class='nav nav-tabs'>
+	<li class='active'><a data-toggle='tab' href='#keyboard_rank'>Keyboard Mode</a></li>
+	<li><a data-toggle='tab' href='#voice_rank'>Voice Mode</a></li>
+</ul>
+
+<div class='tab-content'>
+	<div id='keyboard_rank' class='tab-pane fade in active'>
+		<ol>
+            {% for item in key_list %}
+                <li>{{ item.user.username }} : {{ item.score }}</li>
+            {% endfor %}
+		</ol>
+	</div>
+	<div id='voice_rank' class='tab-pane fade'>
+		<ol>
+            {% for item in voice_list %}
+			    <li>{{ item.user.username }} : {{ item.score }}</li>
+            {% endfor %}
+		</ol>
+	</div>
+</div>

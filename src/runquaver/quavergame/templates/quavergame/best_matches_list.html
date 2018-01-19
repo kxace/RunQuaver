@@ -1,0 +1,41 @@
+{% load static %}
+<ul class='nav nav-tabs'>
+	<li class='active'><a data-toggle='tab' href='#keyboard_mode'>Keyboard Mode</a></li>
+	<li><a data-toggle='tab' href='#voice_mode'>Voice Mode</a></li>
+</ul>
+
+<div class='tab-content'>
+	<div id='keyboard_mode' class='tab-pane fade in active'>
+		<ol>
+            {% for item in key_list %}
+			    <li><img class="back-btn" src="{{ info.icon }}"> &nbsp;&nbsp;{{ item.user.username }} : {{ item.score }}</li>
+            {% endfor %}
+		</ol>
+	</div>
+	<div id='voice_mode' class='tab-pane fade'>
+		<ol>
+            {% for item in voice_list %}
+			    <li><img class="back-btn" src="{{ info.icon }}"> &nbsp;&nbsp;{{ item.user.username }} : {{ item.score }}</li>
+            {% endfor %}
+		</ol>
+	</div>
+</div>
+
+<!--Modal start-->
+<div id="matchModal" class="modal">
+    <div class="modal-content modal-content-match">
+        <!--modal header-->
+        <div class="modal-header">
+            <span id="matchClose" class="close"><img class="close-icon" src="{% static 'img/close.png' %}"></span>
+            <h3>Match</h3>
+        </div>
+        <!--modal body-->
+        <div class="modal-body">
+
+            <div class='screen' id="sketch-holder2">
+				
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal end-->

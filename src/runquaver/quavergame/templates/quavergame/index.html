@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Run!Quaver</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/game.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/vendor/modernizr-2.6.2.min.js' %}"></script>
+
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}" type="text/javascript"></script>
+
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/p5.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/p5.dom.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/p5.sound.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/reconnecting-websocket.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/p5.gif.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/sketch.js' %}"></script>
+<!--{#    <script type="text/javascript" src="{% static 'js/sketch2.js' %}"></script>#}-->
+    <script type="text/javascript" src="{% static 'js/bird.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/pipe.js' %}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="pure-container" data-effect="pure-effect-reveal">
+    <input type="checkbox" id="pure-toggle-left" class="pure-toggle" data-toggle="left">
+    <label class="pure-toggle-label" for="pure-toggle-left" data-toggle-label="left">
+        <span class="pure-toggle-icon"></span>
+    </label>
+
+    <!--{#  Content inside the drawer  #}-->
+    <nav class="pure-drawer index-pure" data-position="left">
+        <div class="row index-pure-blank"></div>
+
+        <div id="img-frame index-pure-frame">
+            <div class="display-center drawer-icon-frame">
+                <img class="drawer-icon" src="{{ info.icon }}">
+            </div>
+        </div>
+        <h3 class="index-pure-username" id='username'>{{ username }}</h3>
+
+        <ul class="index-ul">
+            <li class="li-divider"></li>
+            <li id="rankTrigger" class="drawer" data-toggle="modal" data-target="#ranksModal"><div class="dis-inline"><img class="list-icon" src="{% static 'img/rank.png' %}"/></div><div class="dis-inline">RANKING BOARD</div></li>
+            <li class="li-divider"></li>
+            <li id="listTrigger" class="drawer" data-toggle="modal" data-target="#listModal"><div class="dis-inline"><img class="list-icon" src="{% static 'img/matchList.png' %}" style="top: 50%;"/></div><div class="dis-inline">MY BEST MATCHES</div></li>
+            <li class="li-divider"></li>
+            <form method="GET" action="{% url 'logout' %}">
+                <button id="inside-log" class='btn btn-logout' type="submit">Log out</button>
+            </form>
+        </ul>
+    </nav>
+
+    <!-- Content inside the page -->
+    <div class="pure-pusher-container" >
+        <div class="pure-pusher" background="http://nintendonews.com/wp-content/uploads/2014/04/mario_kart_8_loading_screen.jpg">
+            <!-- Instruction hover button -->
+            <div id="mySidenav" data-toggle="modal" data-target="#helpModal">
+                <a href="#" id="ins"><p>Help</p><p>&#63; &nbsp;&nbsp;</p></a>
+            </div>
+
+            <div class='container-fluid'>
+
+                <div class='row'>
+                    <div class='screen' id="sketch-holder">
+                        <!-- Our sketch will go here! -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <label class="pure-overlay" for="pure-toggle-left" data-overlay="left"></label>
+</div>
+
+<!--Modal start-->
+<div id="ranksModal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content modal-content-bg">
+        <!--modal header-->
+        <div class="modal-header">
+            <span id="rankClose" class="close" data-dismiss="modal"><img class="close-icon" src="{% static 'img/close.png' %}"></span>
+            <div>RANKING BOARD</div>
+        </div>
+        <!--modal body-->
+        <div class="modal-body">
+            <div id="rank-bar">
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!--Modal end-->
+
+<div id="listModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    <div class="modal-content modal-content-bg">
+        <div class="modal-header">
+            <span id="listClose" class="close" data-dismiss="modal"><img class="close-icon" src="{% static 'img/close.png' %}"></span>
+            <div>MY BEST MATCHES</div>
+        </div>
+
+        <div class="modal-body">
+            <div id="game-list">
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!--Game finish pop up-->
+<div id="finishModal" class="modal fade">
+    <div class="modal-content">
+
+        <div class="modal-body">
+            <p class="dis-inline" id="score">YOUR FINAL SCORE IS &nbsp;&nbsp;&nbsp;<p class="dis-inline" id="score-number"></p></p>
+            <img id="refresh-button" class="drawer-icon button-refresh" style="margin-bottom: 30px;" src="{% static 'img/restart.png' %}">
+        </div>
+    </div>
+</div>
+
+
+<!--Instruction modal inside the game-->
+<div id="helpModal" class="modal fade" role="dialog">
+    <div id="help-content" class="modal-content">
+
+        <div class="modal-header">
+            <span id="helpClose" class="close" data-dismiss="modal"><img class="close-icon" src="{% static 'img/close.png' %}"></span>
+            <div>Instruction</div>
+	</div>
+
+        <div class="modal-body">
+            <div class="container">
+              <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" data-type="multi">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#myCarousel" data-slide-to="1"></li>
+                  <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                  <div class="item active">
+                      <img class="help" src="{% static 'img/home.png' %}">
+                      <div class="carousel-caption">
+
+                      </div>
+                  </div>
+
+                  <div class="item">
+                      <img class="help" src="{% static 'img/info.png' %}">
+                      <div class="carousel-caption">
+
+                      </div>
+                  </div>
+
+                  <div class="item">
+                      <img class="help" src="{% static 'img/game.png' %}">
+                      <div class="carousel-caption">
+                          
+                      </div>
+                  </div>
+
+		  <div class="item">
+			<img class="help" src="{% static 'img/cover.png' %}">
+			<div class="carousel-caption">
+			    <h4>Please put your headphone on to enhance game experience!</h4>
+			</div>
+		  </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{#<script src="{% static 'js/vendor/prism.js' %}"></script>#}
+{#<script src="{% static 'js/vendor/scrollIt.js' %}"></script>#}
+{#<script src="{% static 'js/vendor/jquery.scrollTo.js' %}"></script>#}
+{#<script src="{% static 'js/vendor/jquery.localScroll.js' %}"></script>#}
+{#<script src="{% static 'js/vendor/smoothscroll.js' %}"></script>#}
+{#<script src="{% static 'js/vendor/wow.js' %}"></script>#}
+{#<script src="{% static 'js/vendor/stellar.js' %}"></script>#}
+{##}
+{##}
+{#<script type="text/javascript">var switchTo5x=true;</script>#}
+{#<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>#}
+
+</body>
+</html>

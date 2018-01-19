@@ -1,0 +1,12 @@
+<div id='topbar-logged' class='container-fluid'>
+    <h2>RUN! QUAVER</h2>
+    <hr>
+    <div class="margin">
+        <ul>
+            <li class="dis-inline"><img class="back-btn" src="{{info.icon}}"></li>
+            <li class='dis-inline'><span class='glyphicon glyphicon-user'></span>: <span id="user">{{user.username}}</span></li>
+            <li class='dis-inline barcode'>    <span class='glyphicon glyphicon-thumbs-up'></span>: {{ highest_score }}</li>
+            <button id="inside-log" class='btn btn-logout' type="button" onclick="logoutFunc()">Log out</button>
+        </ul>
+    </div>
+</div>
